@@ -23,7 +23,7 @@ services:
   nginx:
     image: nginx:alpine  # Используем легковесный образ Nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro  # Монтируем вашу конфигурацию
+      - ./nano.conf:/etc/nginx/nginx.conf:ro  # Монтируем вашу конфигурацию
       - ./Landing/build:/var/www/html/mydomain  # Монтируем скомпилированные файлы фронтенда
     ports:
       - "80:80"  # Для HTTP
