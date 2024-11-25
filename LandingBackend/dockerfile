@@ -1,0 +1,21 @@
+# Используем официальный образ Python в качестве основы
+FROM python:3.8-slim
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем файл зависимостей и устанавливаем их
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем все файлы в контейнер
+COPY . /app
+
+# Устанавливаем Gunicorn для продакшн-сервера
+RUN pip install gunicorn
+
+# Открываем порт, на котором будет работать Flask
+EXPOSE 5000
+
+# Запускаем Flask-приложение с помощью Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
